@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Camera } from "expo-camera";
+import * as Location from "expo-location";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const CreateScreen = ({ navigation }) => {
@@ -9,11 +10,12 @@ const CreateScreen = ({ navigation }) => {
 
   const takePhoto = async () => {
     const photo = await camera.takePictureAsync();
+    const location = await Location.getCurrentPositionAsync();
     setPhoto(photo.uri);
   };
 
   const sendPhoto = () => {
-    navigation.navigate("Posts", { photo });
+    navigation.navigate("DefaultScreen", { photo });
   };
 
   return (
